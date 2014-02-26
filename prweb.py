@@ -3,6 +3,7 @@
 import jinja2
 import feedparser
 import cgi
+import settings
 import cgitb
 cgitb.enable(display=1, logdir="/home/dare/cgi/")
 
@@ -11,7 +12,7 @@ if 'visibility' in form:
 	visibility = int(form['visibility'].value)
 else:
 	visibility = 49900
-z = feedparser.parse('http://www.prweb.com/feeds/zemanta.xml')
+z = feedparser.parse(settings.FEED)
 items = [item for item in z['items'] if 'visibility' in item and int(item['visibility']) > visibility]
 #items = map(lambda item: item['summary'] = cgi.escape(item['summary']), items)
 for item in items:
